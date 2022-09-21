@@ -4,7 +4,7 @@ const { validateBody } = require('../middlewares/postsMiddleware');
 const { adminAuth } = require('../middlewares/userMiddleware');
 const Controller = require('../controllers/postsController');
 
-router.get('/', adminAuth, Controller.getPostsList);
+router.get('/', auth, Controller.getPostsList);
 
 router.post('/', validateBody, adminAuth, Controller.addPost);
 
