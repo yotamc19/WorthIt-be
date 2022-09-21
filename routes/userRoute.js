@@ -3,6 +3,9 @@ const router = express.Router();
 const { validateBody, isNewUser, hashPass, isExistingUser, verifyPass, auth } = require('../middlewares/userMiddleware');
 const Controller = require('../controllers/userController');
 
+//useEffect for page refresh
+router.get('/currentUser', auth, Controller.getUser)
+
 //signup a new user
 router.post('/signup', validateBody, isNewUser, hashPass, Controller.signUp)
 

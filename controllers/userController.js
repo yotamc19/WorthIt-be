@@ -1,6 +1,6 @@
 const User = require('../schemas/userSchema');
 const jwt = require("jsonwebtoken");
-const { addUser, updateUserById } = require('../models/userModel');
+const { addUser, updateUserById, getUserById } = require('../models/userModel');
 require("dotenv").config();
 
 const signUp = async (req, res) => {
@@ -56,15 +56,17 @@ const logout = async (req, res) => {
     }
 }
 
-// const getUser = async (req, res) => {
-//     try {
-//         let user = await getUserById(req.params.id);
-//         user[0].password = '';
-//         res.send(user[0]);
-//     } catch (err) {
-//         res.status(400).send('No user with this id');
-//     }
-// }
+const getUser = async (req, res) => {
+    try {
+        const user = await getUserById(req.body.id);
+        const { email, firstName, lastName, phoneNumber, isAdmin } = user[0];
+        res.send({
+            email, firstName, lastName, phoneNumber, isAdmin
+        });
+    } catch (err) {
+        res.status(400).send('No user with this id');
+    }
+}
 
 // const getUsersList = async (req, res) => {
 //     try {
@@ -87,4 +89,4 @@ const updateUser = async (req, res) => {
     }
 }
 
-module.exports = { signUp, login, logout, updateUser };
+module.exports = { signUp, login, logout, updateUser, getUser };
