@@ -86,4 +86,24 @@ const auth = async (req, res, next) => {
     });
 }
 
-module.exports = { validateBody, isNewUser, hashPass, isExistingUser, verifyPass, auth };
+const adminAuth = async (req, res, next) => {
+    const { token } = req.cookies;
+    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decoded) => {
+        if (err) {
+            res.status(401).send("Unauthorized");
+            return;
+        }
+        if (decoded) {
+            req.body.id = decoded.id;
+            const user = await getUserById(decoded.id);
+            if (!user[0].isAdmin) {
+                res.status(401).send("Unauthorized");
+                return;
+            }
+            next();
+            return;
+        }
+    });
+}
+
+module.exports = { validateBody, isNewUser, hashPass, isExistingUser, verifyPass, auth, adminAuth };
