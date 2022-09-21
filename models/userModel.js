@@ -21,7 +21,8 @@ const validateEmail = (email) => {
 
 const updateUserById = async (id, updatedUser) => {
     const doc = await User.findOneAndUpdate({ _id: id }, updatedUser, { new: true });
-    return doc;
+    const { firstName, lastName, email } = doc;
+    return { firstName, lastName, email };
 }
 
 const getUserByEmail = async (email) => {

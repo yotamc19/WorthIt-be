@@ -16,9 +16,9 @@ router.post('/login', validateBody, isExistingUser, verifyPass, Controller.login
 router.get('/logout', Controller.logout);
 
 //update a user
-router.put('/:id', auth, validateBody, isNewUser, Controller.updateUser);
+router.put('/', auth, validateBody, isNewUser, Controller.updateUser);
 
 //update the password of the user
-router.put('/:id/update-password', auth, hashPass, Controller.updateUser);
+router.put('/update-password', auth, hashPass, Controller.updateUser);
 
 module.exports = router;

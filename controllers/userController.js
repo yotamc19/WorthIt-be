@@ -76,7 +76,7 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const doc = await updateUserById(req.params.id, req.body);
+        const doc = await updateUserById(req.body.id, req.body);
         if (!doc) {
             throw new Error();
         }
