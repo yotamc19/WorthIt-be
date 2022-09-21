@@ -1,14 +1,32 @@
-const signUpSchema = {
-  type: "object",
-  properties: {
-    fullname: { type: "string" },
-    email: { type: "string" },
-    password: { type: "string", minLength: 2 },
-    repassword: { type: "string", minLength: 2 },
-    isAdmin: { type: "boolean", nullable: true },
-  },
-  required: ["email", "password", "repassword", "fullname"],
-  additionalProperties: false,
-};
+const mongoose = require('mongoose');
 
-module.exports = { signUpSchema };
+const userSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+    },
+    phoneNumber: {
+        type: String,
+        required: true,
+    },
+    isAdmin: {
+        type: Boolean,
+        required: true,
+    },
+}, { timestamps: true });
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
