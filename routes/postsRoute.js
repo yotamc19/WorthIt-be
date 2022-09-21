@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { validateBody } = require('../middlewares/postsMiddleware');
-const { adminAuth } = require('../middlewares/userMiddleware');
+const { auth, adminAuth } = require('../middlewares/userMiddleware');
 const Controller = require('../controllers/postsController');
 
 router.get('/', auth, Controller.getPostsList);
