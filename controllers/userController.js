@@ -5,13 +5,12 @@ require("dotenv").config();
 
 const signUp = async (req, res) => {
     try {
-        const { email, password, firstName, lastName, phoneNumber } = req.body;
+        const { email, password, firstName, lastName } = req.body;
         const user = new User({
             email,
             password,
             firstName,
             lastName,
-            phoneNumber,
             isAdmin: false,
         });
         const data = await addUser(user);
@@ -22,7 +21,6 @@ const signUp = async (req, res) => {
             email: data.email,
             firstName: data.firstName,
             lastName: data.lastName,
-            phoneNumber: data.phoneNumber,
             isAdmin: false
         });
     } catch (err) {
@@ -39,7 +37,6 @@ const login = async (req, res) => {
             email: req.body.user.email,
             firstName: req.body.user.firstName,
             lastName: req.body.user.lastName,
-            phoneNumber: req.body.user.phoneNumber,
             isAdmin: req.body.user.isAdmin,
         });
     } catch (err) {
@@ -59,9 +56,9 @@ const logout = async (req, res) => {
 const getUser = async (req, res) => {
     try {
         const user = await getUserById(req.body.id);
-        const { email, firstName, lastName, phoneNumber, isAdmin } = user[0];
+        const { email, firstName, lastName, isAdmin } = user[0];
         res.send({
-            email, firstName, lastName, phoneNumber, isAdmin
+            email, firstName, lastName, isAdmin
         });
     } catch (err) {
         res.status(400).send('No user with this id');

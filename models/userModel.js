@@ -19,10 +19,6 @@ const validateEmail = (email) => {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 }
 
-const validatePhoneNumber = (phoneNumber) => {
-    return /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/.test(phoneNumber);
-}
-
 const updateUserById = async (id, updatedUser) => {
     const doc = await User.findOneAndUpdate({ _id: id }, updatedUser, { new: true });
     return doc;
@@ -33,4 +29,4 @@ const getUserByEmail = async (email) => {
     return res;
 }
 
-module.exports = { validateEmail, validatePhoneNumber, addUser, getUserById, updateUserById, getUserByEmail };
+module.exports = { validateEmail, addUser, getUserById, updateUserById, getUserByEmail };

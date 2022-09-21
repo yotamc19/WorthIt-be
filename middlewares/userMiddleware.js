@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
-const { getUserByEmail, validateEmail, validatePhoneNumber } = require('../models/userModel');
+const { getUserByEmail, validateEmail } = require('../models/userModel');
 
 const validateBody = (req, res, next) => {
-    const { email, password, repassword, phoneNumber } = req.body;
+    const { email, password, repassword } = req.body;
     if (email && !validateEmail(email)) {
         res.status(400).send('Not a valid email address');
         return;
@@ -14,10 +14,6 @@ const validateBody = (req, res, next) => {
     }
     if (password && repassword && password !== repassword) {
         res.status(400).send('Passwords do not match');
-        return;
-    }
-    if (phoneNumber && !validatePhoneNumber(phoneNumber)) {
-        res.status(400).send('Not a valid phone number');
         return;
     }
     next();
