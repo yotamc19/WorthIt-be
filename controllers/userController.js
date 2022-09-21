@@ -14,7 +14,7 @@ const signUp = async (req, res) => {
             isAdmin: false,
         });
         const data = await addUser(user);
-        const token = jwt.sign({ id: data._id }, process.env.TOKEN_SECRET, { expiresIn: "2h" });
+        const token = jwt.sign({ id: data._id }, process.env.TOKEN_SECRET, { expiresIn: "24h" });
         res.cookie("token", token, { maxAge: 2 * 60 * 60 * 1000 });
         res.send({
             _id: data._id,
@@ -30,7 +30,7 @@ const signUp = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const token = jwt.sign({ id: req.body.user._id }, process.env.TOKEN_SECRET, { expiresIn: "2h" });
+        const token = jwt.sign({ id: req.body.user._id }, process.env.TOKEN_SECRET, { expiresIn: "24h" });
         res.cookie("token", token, { maxAge: 2 * 60 * 60 * 1000 });
         res.send({
             _id: req.body.user._id,
