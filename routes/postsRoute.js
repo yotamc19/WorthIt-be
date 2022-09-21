@@ -8,8 +8,8 @@ router.get('/', adminAuth, Controller.getPostsList);
 
 router.post('/', validateBody, adminAuth, Controller.addPost);
 
-router.put('/:id', validateBody, adminAuth, Controller.updatePost);
+router.put('/', validateBody, adminAuth, Controller.updatePost);
 
-router.delete('/:id', Controller.deletePost);
+router.delete('/', adminAuth, Controller.deletePost);
 
 module.exports = router;

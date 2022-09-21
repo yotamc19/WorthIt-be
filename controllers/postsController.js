@@ -26,7 +26,7 @@ const getPostsList = async (req, res) => {
 
 const updatePost = async (req, res) => {
     try {
-        const doc = await updatePostById(req.params.id, req.body);
+        const doc = await updatePostById(req.body.id, req.body);
         if (!doc) {
             throw new Error();
         }
@@ -38,7 +38,7 @@ const updatePost = async (req, res) => {
 
 const deletePost = async (req, res) => {
     try {
-        await deletePostById(req.params.id);
+        await deletePostById(req.body.id);
         res.send('Post deleted succesfully');
     } catch (err) {
         res.status(400).send('No post with this id');

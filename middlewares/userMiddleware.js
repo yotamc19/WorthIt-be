@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
-const { getUserByEmail, validateEmail } = require('../models/userModel');
+const { getUserByEmail, validateEmail, getUserById } = require('../models/userModel');
 
 const validateBody = (req, res, next) => {
     const { email, password, repassword } = req.body;
