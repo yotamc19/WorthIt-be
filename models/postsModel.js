@@ -5,19 +5,14 @@ const getAllPosts = async () => {
     return list;
 }
 
-const getPostById = async (id) => {
-    const res = await Post.find({ _id: id });
-    return res;
+const getPostById = async (postId) => {
+    const res = await Post.find({ _id: postId });
+    return res[0];
 }
 
 const createPost = async (post) => {
     const data = await post.save();
     return data;
-}
-
-const updatePostById = async (id, updatedPost) => {
-    const doc = await Post.findOneAndUpdate({ _id: id }, updatedPost, { new: true });
-    return doc;
 }
 
 const deletePostById = async (id) => {
@@ -28,4 +23,4 @@ const deletePostById = async (id) => {
     }).clone();
 }
 
-module.exports = { getAllPosts, getPostById, createPost, updatePostById, deletePostById };
+module.exports = { getAllPosts, getPostById, createPost, deletePostById };

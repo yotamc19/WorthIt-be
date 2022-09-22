@@ -1,5 +1,5 @@
 const Post = require('../schemas/postSchema');
-const { getAllPosts, getPostById, createPost, updatePostById, deletePostById } = require('../models/postsModel');
+const { getAllPosts, getPostById, createPost, deletePostById } = require('../models/postsModel');
 
 const addPost = async (req, res) => {
     try {
@@ -24,13 +24,10 @@ const getPostsList = async (req, res) => {
     }
 }
 
-const updatePost = async (req, res) => {
+const getPost = async (req, res) => {
     try {
-        const doc = await updatePostById(req.body.id, req.body);
-        if (!doc) {
-            throw new Error();
-        }
-        res.send(doc);
+        const post = await getPostById(req.params.postId);
+        res.send(post);
     } catch (err) {
         res.status(400).send('No post with this id');
     }
@@ -38,11 +35,11 @@ const updatePost = async (req, res) => {
 
 const deletePost = async (req, res) => {
     try {
-        await deletePostById(req.body.id);
+        await deletePostById(req.params.postId);
         res.send('Post deleted succesfully');
     } catch (err) {
         res.status(400).send('No post with this id');
     }
 }
 
-module.exports = { addPost, getPostsList, updatePost, deletePost };
+module.exports = { addPost, getPostsList, deletePost, getPost };

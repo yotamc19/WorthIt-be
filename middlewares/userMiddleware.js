@@ -8,8 +8,8 @@ const validateBody = (req, res, next) => {
         res.status(400).send('Not a valid email address');
         return;
     }
-    if (password && password.length < 6) {
-        res.status(400).send('Password has to be at least 6 letters');
+    if (password && password.length < 2) {
+        res.status(400).send('Password has to be at least 2 letters');
         return;
     }
     if (password && repassword && password !== repassword) {

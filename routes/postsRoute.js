@@ -6,10 +6,10 @@ const Controller = require('../controllers/postsController');
 
 router.get('/', auth, Controller.getPostsList);
 
+router.get('/:postId', auth, Controller.getPost);
+
 router.post('/', validateBody, adminAuth, Controller.addPost);
 
-router.put('/', validateBody, adminAuth, Controller.updatePost);
-
-router.delete('/', adminAuth, Controller.deletePost);
+router.delete('/:postId', adminAuth, Controller.deletePost);
 
 module.exports = router;
